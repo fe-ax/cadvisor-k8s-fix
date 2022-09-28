@@ -3,7 +3,7 @@ When using Rancher monitoring with Kubernetes 1.24 cAdvisor doesn't work properl
 
 Deploy using Kustomize or CD tool
 
-## Extra instructions for prometheus (Rancher-monitoring-stack vXXXX)
+## Extra instructions for prometheus (Rancher-monitoring-stack version 100.1.3+up19.0.3)
 
 * Click edit as yaml
 * Change defaultRules.rules.k8s to false
