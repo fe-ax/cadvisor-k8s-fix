@@ -1,0 +1,32 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: cadvisor
+  namespace: cadvisor
+spec:
+  selector:
+    matchLabels:
+      app: cadvisor
+  endpoints:
+  - honorLabels: true
+    metricRelabelings:
+    - sourceLabels:
+      - container_label_io_kubernetes_pod_name
+      targetLabel: pod
+    - sourceLabels:
+      - container_label_io_kubernetes_pod_namespace
+      targetLabel: namespace
+    - sourceLabels:
+      - container_label_io_kubernetes_container_name
+      targetLabel: container
+    - replacement: ""
+      targetLabel: cluster
+    path: /metrics
+    port: http
+    relabelings:
+    - sourceLabels:
+      - __metrics_path__
+      targetLabel: metrics_path
+  namespaceSelector:
+    matchNames:
+      - cadvisor
